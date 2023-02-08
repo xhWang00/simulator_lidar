@@ -399,7 +399,7 @@ if __name__ == "__main__":
     env = 'toy1' # name of the yaml file inside the config folder
     out_fn = 'toy1_setting1'# name of the output folder - create this folder inside the output folder
     out_file_type = 'txyocc' # or 'carmen'
-    save_all_data_as_npz = True # save all data for each time step for offline use - this will require memory
+    save_all_data_as_npz = False # save all data for each time step for offline use - this will require memory
 
     # robot configuration
     n_reflections = 360 # number of lidar beams in the 2D plane

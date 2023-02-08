@@ -1,0 +1,1 @@
+ffmpeg -framerate 10 -i {file_name_prefix}%d.png out.mp4

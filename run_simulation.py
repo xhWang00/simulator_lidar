@@ -194,7 +194,11 @@ def get_way_points_gui(environment, vehicle_poses=None):
     fig = pl.figure()#figsize=(10, 5))  # (9,5)
     ax = fig.add_subplot(111)
     pl.title('Generate waypoints: 1) Click to start. 2) Move the mouse. \n3) Click to stop. 4) lose the gui to exit')
-    ax.scatter(connected_components[:, 0], connected_components[:, 1], marker='.', c='y', edgecolor='', alpha=0.2)  # obstacles
+
+#    edgecolor connot be '' for new version of python, change it to 'none'
+#    ax.scatter(connected_components[:, 0], connected_components[:, 1], marker='.', c='y', edgecolor='', alpha=0.2)  # obstacles
+    ax.scatter(connected_components[:, 0], connected_components[:, 1], marker='.', c='y', edgecolor='none', alpha=0.2)  # obstacles
+
     if vehicle_poses is not None:
         pl.plot(vehicle_poses[:, 0], vehicle_poses[:, 1], 'o--', c='m')
     pl.xlim(area[:2]); pl.ylim(area[2:])
@@ -358,11 +362,17 @@ def main(env='toy1', out_fn='toy1_setting1', out_file_type = 'txyocc', save_all_
         pl.close('all')
         fig = pl.figure() #figsize=(9,5)
         ax = fig.add_subplot(111)
-        ax.scatter(connected_components[:,0], connected_components[:,1], marker='.', c='y', edgecolor='', alpha=0.2) #obstacles
+
+#        ax.scatter(connected_components[:,0], connected_components[:,1], marker='.', c='y', edgecolor='', alpha=0.2) #obstacles
+        ax.scatter(connected_components[:,0], connected_components[:,1], marker='.', c='y', edgecolor='none', alpha=0.2) #obstacles
+
         for i in range(n_reflections): #laser beams
             ax.plot(np.asarray([robot_pos[0], laser_data_xy[i, 0]]), np.asarray([robot_pos[1], laser_data_xy[i, 1]]), c='b', zorder=1, alpha=0.2)
             if dist_theta[i] < max_laser_distance:
-                ax.scatter(laser_data_xy[i,0], laser_data_xy[i,1], marker='o', c='r', zorder=2, edgecolor='') #laser end points
+
+#                ax.scatter(laser_data_xy[i,0], laser_data_xy[i,1], marker='o', c='r', zorder=2, edgecolor='') #laser end points
+                ax.scatter(laser_data_xy[i,0], laser_data_xy[i,1], marker='o', c='r', zorder=2, edgecolor='none') #laser end points
+
         ax.scatter([0], [0], marker='*', c='k', s=20, alpha=1.0, zorder=3, edgecolor='k')  # global origin
         ax.scatter(robot_pos[0], robot_pos[1], marker=(3, 0, robot_pos[2]/np.pi*180), c='k', s=300, alpha=1.0, zorder=3, edgecolor='k')#robot's position
         ax.plot(robot_poses[:,0], robot_poses[:,1], 'k--')
